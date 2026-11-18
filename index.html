@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Полина Данилова · портфолио</title>
 <meta name="description" content="Контент-продюсер, монтаж, съёмка. Reels для брендов, блогеров и музыкантов. Санкт-Петербург.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff5fa8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>if (window.gsap && window.ScrollTrigger && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anim');</script>
 <style>
 :root{
   --bg:#0b0a0b; --ink:#f4efe9; --mute:#8d8589; --line:#262124;
@@ -56,6 +60,7 @@ section{padding:clamp(64px,10vw,140px) clamp(16px,4vw,48px)}
 .sec-head{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;align-items:end;margin-bottom:clamp(32px,5vw,64px)}
 .num{font-family:var(--disp);font-size:clamp(14px,1.4vw,18px);color:var(--pink)}
 h2{font-family:var(--disp);font-weight:400;font-size:clamp(44px,9vw,140px);line-height:.85;text-transform:uppercase;letter-spacing:-.02em;grid-column:1/-1}
+.sec-head h2{padding-bottom:.1em}
 .sec-head p{grid-column:1/-1;max-width:620px;color:var(--mute);margin-top:12px}
 
 .project{margin-bottom:clamp(56px,8vw,110px)}
@@ -140,6 +145,7 @@ body.lagging, body.lagging *{cursor:progress!important}
   padding:12px 16px;border-radius:999px;transform:rotate(-6deg);box-shadow:0 6px 24px rgba(255,95,168,.35);transition:transform .2s}
 .nope:hover{transform:rotate(4deg) scale(1.08)}
 .nope.gone{opacity:0;pointer-events:none}
+.nope.aside{opacity:0;pointer-events:none;transform:rotate(-6deg) translateY(30px);transition:opacity .3s,transform .3s}
 .joke{position:fixed;inset:0;z-index:55;display:none;place-items:center;text-align:center;padding:24px;background:var(--bg)}
 .joke.on{display:grid;animation:jin .5s cubic-bezier(.2,.8,.2,1.2)}
 @keyframes jin{from{opacity:0;transform:scale(.9)}}
@@ -147,6 +153,44 @@ body.lagging, body.lagging *{cursor:progress!important}
 .joke h2{font-size:clamp(40px,9vw,120px);margin-bottom:16px}
 .joke p:not(.joke-k){color:var(--mute);max-width:440px;margin:0 auto}
 .joke .c-row a.hot{background:var(--pink);border-color:var(--pink);color:#000}
+
+/* reels: phones */
+.stage-wrap{position:relative}
+.stage{display:flex;justify-content:center;align-items:center;gap:clamp(12px,1.6vw,24px);perspective:1400px;padding:30px 0 10px}
+.phone{position:relative;flex:0 0 auto;width:clamp(150px,15vw,236px);aspect-ratio:9/19;border-radius:clamp(26px,2.6vw,38px);padding:7px;
+  background:linear-gradient(145deg,#2c2629,#121012 55%,#2a2427);box-shadow:0 30px 60px -20px rgba(0,0,0,.8),inset 0 0 0 1px #3a3236;cursor:pointer;transform-style:preserve-3d;will-change:transform}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:clamp(20px,2.1vw,31px);overflow:hidden;background:#161315}
+.phone video{width:100%;height:100%;object-fit:cover;display:block}
+.phone .scr::before{content:"";position:absolute;top:8px;left:50%;width:30%;height:16px;margin-left:-15%;border-radius:99px;background:#000;z-index:2}
+.phone .scr::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 38%);pointer-events:none}
+.phone .play{position:absolute;right:12px;bottom:12px;z-index:3;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#000;font-size:13px;transition:background .25s}
+.phone:hover .play{background:var(--pink)}
+.phone.mid{width:clamp(180px,18.5vw,290px)}
+.sticker{position:absolute;z-index:5;left:clamp(0px,8vw,140px);top:0;background:var(--pink);color:#000;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:8px 12px;transform:rotate(-7deg);border-radius:4px}
+.sticker.b{left:auto;right:clamp(0px,8vw,140px);top:auto;bottom:-6px;background:var(--ink);transform:rotate(5deg)}
+.hint{display:none;color:var(--mute);font-size:13px;margin-top:10px}
+
+/* preloader */
+#pre{position:fixed;inset:0;z-index:80;background:var(--pink);color:#000;display:none;align-items:flex-end;justify-content:space-between;padding:clamp(16px,4vw,48px)}
+.anim #pre{display:flex}
+#pre b{font-family:var(--disp);font-weight:400;font-size:clamp(80px,22vw,320px);line-height:.8}
+#pre span{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px;padding-bottom:1em}
+
+/* split letters: mask with room for tails, removed after entrance */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.08em .04em .14em;margin:-.08em -.04em -.14em}
+.w.open{overflow:visible}
+.ch{display:inline-block;will-change:transform}
+
+/* cursor */
+.cur{position:fixed;left:0;top:0;z-index:90;pointer-events:none;display:none}
+.cur i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--pink)}
+.cur em{position:absolute;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--pink);color:#000;display:grid;place-items:center;
+  font:700 11px/1.1 var(--body);letter-spacing:.1em;text-transform:uppercase;font-style:normal;text-align:center;transform:scale(0);transition:transform .3s cubic-bezier(.2,.8,.2,1.3)}
+.cur.big em{transform:scale(1)}
+.cur.big i{opacity:0}
+body:has(.lb.on) .cur, body:has(.joke.on) .cur{display:none!important}
+@media (hover:hover) and (pointer:fine){ .anim .cur{display:block} }
+.anim .marquee div{animation:none}
 
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -160,18 +204,25 @@ body.lagging, body.lagging *{cursor:progress!important}
   .hero-media video:not(:first-child){display:none}
   .series,.about{grid-template-columns:1fr}
   .series-txt{position:static}
-  .masonry{columns:2 140px;column-gap:8px}.masonry figure{margin-bottom:8px}
+  .masonry,.series .masonry{columns:2 140px;column-gap:8px}.masonry figure{margin-bottom:8px}
+  .stage{justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;perspective:none;margin:0 calc(-1*clamp(16px,4vw,48px));padding:30px clamp(16px,4vw,48px) 16px;scrollbar-width:none}
+  .stage::-webkit-scrollbar{display:none}
+  .phone,.phone.mid{width:62vw;max-width:260px;scroll-snap-align:center}
+  .sticker{left:4px}.sticker.b{display:none}
+  .hint{display:block}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<div id="pre" aria-hidden="true"><span>Полина Данилова · портфолио</span><b id="preN">0</b></div>
+<div class="cur" id="cur" aria-hidden="true"><i></i><em></em></div>
 <div id="page"><div id="sheet">
 
 <nav>
   <a href="#top">P.D. ✦</a>
   <div class="links">
-    <a href="#brands">Бренды</a><a href="#bloggers">Блогеры</a><a href="#music">Музыка</a><a href="#events">Ивенты</a><a href="#photo">Фото</a><a href="#contact">Связаться</a>
+    <a href="#reels">Reels</a><a href="#brands">Бренды</a><a href="#bloggers">Блогеры</a><a href="#music">Музыка</a><a href="#events">Ивенты</a><a href="#photo">Фото</a><a href="#contact">Связаться</a>
   </div>
 </nav>
 
@@ -185,19 +236,35 @@ body.lagging, body.lagging *{cursor:progress!important}
     <span class="kicker">Креативный и исполнительный продюсер<span class="city"> · Санкт-Петербург</span></span>
     <h1>Полина<br><span class="o">Данилова</span></h1>
     <div class="hero-row">
-      <p>Придумываю концепции и продюсирую Reels, клипы, съёмки и мероприятия под ключ: идея, команда, подрядчики, площадка и готовый результат.</p>
+      <p>Придумываю концепции, сама снимаю и монтирую Reels на телефон, продюсирую клипы, съёмки и мероприятия под ключ. Идея, команда, подрядчики, площадка и готовый результат.</p>
       <a class="btn" href="#contact">Обсудить проект ↘</a>
     </div>
   </div>
 </header>
 
 <div class="marquee" aria-hidden="true"><div>
-  <span>идея</span>✦<span>продакшен</span>✦<span>команда</span>✦<span>подрядчики</span>✦<span>ивенты</span>✦<span>фото</span>✦<span>reels</span>✦<span>клипы</span>✦
-  <span>идея</span>✦<span>продакшен</span>✦<span>команда</span>✦<span>подрядчики</span>✦<span>ивенты</span>✦<span>фото</span>✦<span>reels</span>✦<span>клипы</span>✦
+  <span>идея</span>✦<span>съёмка на телефон</span>✦<span>монтаж</span>✦<span>продакшен</span>✦<span>команда</span>✦<span>ивенты</span>✦<span>фото</span>✦<span>reels</span>✦<span>клипы</span>✦
+  <span>идея</span>✦<span>съёмка на телефон</span>✦<span>монтаж</span>✦<span>продакшен</span>✦<span>команда</span>✦<span>ивенты</span>✦<span>фото</span>✦<span>reels</span>✦<span>клипы</span>✦
 </div></div>
 
+<section id="reels">
+  <div class="sec-head reveal"><span class="num">01</span><h2>Reels</h2>
+    <p>Снимаю на iPhone и монтирую. Сценарий, кадр, цвет, ритм под трек и короткая подпись с самоиронией, чтобы досматривали до конца.</p></div>
+
+  <div class="project">
+    <div class="p-top reveal"><h3>Ирина Зангирова</h3><div class="tags"><span class="tag hot">съёмка на iPhone</span><span class="tag hot">монтаж</span><span class="tag">сценарии</span><span class="tag">цвет</span></div></div>
+    <p class="p-note reveal">Lifestyle-блог бывшей художественной гимнастки и владелицы школы растяжки. Студия с арками, несколько образов от нежно-розового до тёмного и серия коротких роликов из одного съёмочного дня.</p>
+    <div class="stage-wrap">
+      <span class="sticker">снято на iPhone</span>
+      <div class="stage" data-set="ira"></div>
+      <span class="sticker b">снимала я</span>
+      <p class="hint">листайте вбок → нажмите на ролик, чтобы смотреть со звуком</p>
+    </div>
+  </div>
+</section>
+
 <section id="brands">
-  <div class="sec-head reveal"><span class="num">01</span><h2>Бренды</h2>
+  <div class="sec-head reveal"><span class="num">02</span><h2>Бренды</h2>
     <p>Коллаборации блогеров и брендов: концепция, локация, команда и съёмка, где продукт главный, но рекламы никто не чувствует.</p></div>
 
   <div class="project reveal">
@@ -208,7 +275,7 @@ body.lagging, body.lagging *{cursor:progress!important}
 </section>
 
 <section id="bloggers">
-  <div class="sec-head reveal"><span class="num">02</span><h2>Блогеры</h2>
+  <div class="sec-head reveal"><span class="num">03</span><h2>Блогеры</h2>
     <p>Lifestyle и сторителлинг с характером: от вечеринки на лестнице до розового лифта.</p></div>
 
   <div class="project reveal">
@@ -226,7 +293,7 @@ body.lagging, body.lagging *{cursor:progress!important}
 </section>
 
 <section id="music">
-  <div class="sec-head reveal"><span class="num">03</span><h2>Музыка</h2>
+  <div class="sec-head reveal"><span class="num">04</span><h2>Музыка</h2>
     <p>Клипы и сниппеты для артистов: интерьер как персонаж, титры как часть кадра.</p></div>
 
   <div class="project reveal">
@@ -242,7 +309,7 @@ body.lagging, body.lagging *{cursor:progress!important}
 </section>
 
 <section id="events">
-  <div class="sec-head reveal"><span class="num">04</span><h2>Ивенты</h2>
+  <div class="sec-head reveal"><span class="num">05</span><h2>Ивенты</h2>
     <p>Организую мероприятия под ключ: гости, партнёры, подарки, артисты, фото- и видеосъёмка, тайминг вечера.</p></div>
 
   <div class="project reveal">
@@ -254,7 +321,7 @@ body.lagging, body.lagging *{cursor:progress!important}
 </section>
 
 <section id="photo">
-  <div class="sec-head reveal"><span class="num">05</span><h2>Фото</h2>
+  <div class="sec-head reveal"><span class="num">06</span><h2>Фото</h2>
     <p>Мои авторские съёмки от идеи до результата: концепция, локация, модели, свет, съёмка и ретушь.</p></div>
 
   <div class="project series reveal">
@@ -276,14 +343,15 @@ body.lagging, body.lagging *{cursor:progress!important}
     <div class="reveal">
       <p class="big">Весь продакшен <em>на мне</em>: от идеи до <em>готового</em> результата.</p>
       <p>Я креативный и исполнительный продюсер: придумываю концепцию, собираю команду, нахожу подрядчиков и площадки, веду съёмку до финала. Пришла из профессионального спорта, поэтому дисциплина и сроки для меня норма.</p>
-      <p>Сейчас продюсирую lifestyle-блог, организую мероприятия и веду PR и продвижение брендов.</p>
+      <p>Сейчас веду lifestyle-блог от сценария до монтажа, организую мероприятия, занимаюсь PR и продвижением брендов.</p>
     </div>
     <ul class="skills reveal">
       <li><i>01</i><div><b>Идеи и концепции</b><span>рубрики, контент-план, сценарии, референсы под каждую площадку</span></div></li>
-      <li><i>02</i><div><b>Продакшен под ключ</b><span>команда, подрядчики, локации, модели, тайминг съёмочного дня</span></div></li>
-      <li><i>03</i><div><b>Мероприятия</b><span>гости, партнёры и подарки, артисты, ведущий, фото и видео</span></div></li>
-      <li><i>04</i><div><b>Фото</b><span>авторские серии: идея, свет, съёмка, ретушь</span></div></li>
-      <li><i>05</i><div><b>ИИ в работе</b><span>Claude и ChatGPT для идей, сценариев и сайтов, Higgsfield и другие нейросети для генерации фото и видео</span></div></li>
+      <li><i>02</i><div><b>Reels с телефона</b><span>съёмка на iPhone, монтаж под трек, цвет, подписи</span></div></li>
+      <li><i>03</i><div><b>Продакшен под ключ</b><span>команда, подрядчики, локации, модели, тайминг съёмочного дня</span></div></li>
+      <li><i>04</i><div><b>Мероприятия</b><span>гости, партнёры и подарки, артисты, ведущий, фото и видео</span></div></li>
+      <li><i>05</i><div><b>Фото</b><span>авторские серии, идея, свет, съёмка, ретушь</span></div></li>
+      <li><i>06</i><div><b>ИИ в работе</b><span>Claude и ChatGPT для идей, сценариев и сайтов, Higgsfield и другие нейросети для генерации фото и видео</span></div></li>
     </ul>
   </div>
 </section>
@@ -348,7 +416,7 @@ body.lagging, body.lagging *{cursor:progress!important}
 <div class="lb" id="lb"><button class="nav prev" aria-label="Назад">←</button><button class="nav next" aria-label="Вперёд">→</button><button class="x" aria-label="Закрыть">×</button><div id="lbin"></div></div>
 
 <script>
-const M = {"eni": [{"v": "eni-01.mp4", "p": "eni-01.jpg"}, {"v": "eni-02.mp4", "p": "eni-02.jpg"}, {"v": "eni-03.mp4", "p": "eni-03.jpg"}, {"i": "eni-04.jpg", "w": 1126, "h": 1500}, {"i": "eni-05.jpg", "w": 1126, "h": 1500}, {"i": "eni-06.jpg", "w": 1200, "h": 1500}, {"i": "eni-07.jpg", "w": 1200, "h": 1500}, {"i": "eni-08.jpg", "w": 1200, "h": 1500}, {"i": "eni-09.jpg", "w": 1200, "h": 1500}], "badbarbie": [{"v": "badbarbie-01.mp4", "p": "badbarbie-01.jpg"}, {"v": "badbarbie-02.mp4", "p": "badbarbie-02.jpg"}], "kristi": [{"v": "kristi-01.mp4", "p": "kristi-01.jpg"}, {"v": "kristi-02.mp4", "p": "kristi-02.jpg"}, {"v": "kristi-03.mp4", "p": "kristi-03.jpg"}], "irnby": [{"i": "irnby-01.jpg", "w": 1130, "h": 1500}, {"i": "irnby-02.jpg", "w": 1126, "h": 1500}, {"i": "irnby-03.jpg", "w": 1126, "h": 1500}, {"i": "irnby-04.jpg", "w": 1126, "h": 1500}, {"i": "irnby-05.jpg", "w": 1126, "h": 1500}, {"i": "irnby-06.jpg", "w": 1126, "h": 1500}, {"i": "irnby-07.jpg", "w": 1126, "h": 1500}], "me": [{"i": "me-01.jpg", "w": 1500, "h": 843}, {"i": "me-02.jpg", "w": 1500, "h": 843}, {"i": "me-03.jpg", "w": 1500, "h": 843}, {"i": "me-04.jpg", "w": 1500, "h": 843}, {"i": "me-05.jpg", "w": 1500, "h": 844}, {"i": "me-06.jpg", "w": 1177, "h": 640}, {"i": "me-07.jpg", "w": 1500, "h": 843}, {"i": "me-08.jpg", "w": 1500, "h": 843}, {"i": "me-09.jpg", "w": 1500, "h": 843}, {"i": "me-10.jpg", "w": 1500, "h": 843}, {"i": "me-11.jpg", "w": 1500, "h": 843}, {"i": "me-12.jpg", "w": 1500, "h": 843}, {"i": "me-13.jpg", "w": 1500, "h": 843}, {"i": "me-14.jpg", "w": 1500, "h": 844}, {"i": "me-15.jpg", "w": 1500, "h": 843}, {"i": "me-16.jpg", "w": 1500, "h": 822}, {"i": "me-17.jpg", "w": 1500, "h": 843}, {"i": "me-18.jpg", "w": 997, "h": 1500}, {"i": "me-19.jpg", "w": 997, "h": 1500}, {"i": "me-20.jpg", "w": 997, "h": 1500}, {"i": "me-21.jpg", "w": 996, "h": 1500}, {"i": "me-22.jpg", "w": 997, "h": 1500}, {"i": "me-23.jpg", "w": 997, "h": 1500}, {"i": "me-24.jpg", "w": 997, "h": 1500}, {"i": "me-25.jpg", "w": 997, "h": 1500}, {"i": "me-26.jpg", "w": 997, "h": 1500}, {"i": "me-27.jpg", "w": 997, "h": 1500}, {"i": "me-28.jpg", "w": 997, "h": 1500}, {"i": "me-29.jpg", "w": 997, "h": 1500}, {"i": "me-30.jpg", "w": 997, "h": 1500}, {"i": "me-31.jpg", "w": 1500, "h": 843}, {"i": "me-32.jpg", "w": 1500, "h": 843}, {"i": "me-33.jpg", "w": 1500, "h": 843}], "clip": [{"v": "clip-01.mp4", "p": "clip-01.jpg"}], "snip": [{"v": "snip-01.mp4", "p": "snip-01.jpg"}, {"v": "snip-02.mp4", "p": "snip-02.jpg"}, {"v": "snip-03.mp4", "p": "snip-03.jpg"}], "nikol": [{"v": "nikol-01.mp4", "p": "nikol-01.jpg"}, {"v": "nikol-02.mp4", "p": "nikol-02.jpg"}], "event": [{"i": "event-01.jpg", "w": 1500, "h": 1000}, {"i": "event-02.jpg", "w": 1000, "h": 1500}, {"i": "event-03.jpg", "w": 1000, "h": 1500}, {"i": "event-04.jpg", "w": 1000, "h": 1500}, {"i": "event-05.jpg", "w": 1000, "h": 1500}, {"i": "event-06.jpg", "w": 1000, "h": 1500}, {"i": "event-07.jpg", "w": 1000, "h": 1500}, {"i": "event-08.jpg", "w": 1000, "h": 1500}, {"i": "event-09.jpg", "w": 1000, "h": 1500}, {"i": "event-10.jpg", "w": 1000, "h": 1500}, {"i": "event-11.jpg", "w": 1000, "h": 1500}, {"i": "event-12.jpg", "w": 1000, "h": 1500}, {"i": "event-13.jpg", "w": 1000, "h": 1500}, {"i": "event-14.jpg", "w": 1500, "h": 1000}], "eventvid": [{"v": "event-video.mp4", "p": "event-video.jpg"}], "abandoned": [{"i": "aband-01.jpg", "w": 997, "h": 1500}, {"i": "aband-02.jpg", "w": 997, "h": 1500}, {"i": "aband-03.jpg", "w": 997, "h": 1500}, {"i": "aband-04.jpg", "w": 997, "h": 1500}, {"i": "aband-05.jpg", "w": 1019, "h": 1500}, {"i": "aband-06.jpg", "w": 997, "h": 1500}, {"i": "aband-07.jpg", "w": 997, "h": 1500}, {"i": "aband-08.jpg", "w": 997, "h": 1500}]};
+const M = {"eni": [{"v": "eni-01.mp4", "p": "eni-01.jpg"}, {"v": "eni-02.mp4", "p": "eni-02.jpg"}, {"v": "eni-03.mp4", "p": "eni-03.jpg"}, {"i": "eni-04.jpg", "w": 1126, "h": 1500}, {"i": "eni-05.jpg", "w": 1126, "h": 1500}, {"i": "eni-06.jpg", "w": 1200, "h": 1500}, {"i": "eni-07.jpg", "w": 1200, "h": 1500}, {"i": "eni-08.jpg", "w": 1200, "h": 1500}, {"i": "eni-09.jpg", "w": 1200, "h": 1500}], "badbarbie": [{"v": "badbarbie-01.mp4", "p": "badbarbie-01.jpg"}, {"v": "badbarbie-02.mp4", "p": "badbarbie-02.jpg"}], "kristi": [{"v": "kristi-01.mp4", "p": "kristi-01.jpg"}, {"v": "kristi-02.mp4", "p": "kristi-02.jpg"}, {"v": "kristi-03.mp4", "p": "kristi-03.jpg"}], "irnby": [{"i": "irnby-01.jpg", "w": 1130, "h": 1500}, {"i": "irnby-02.jpg", "w": 1126, "h": 1500}, {"i": "irnby-03.jpg", "w": 1126, "h": 1500}, {"i": "irnby-04.jpg", "w": 1126, "h": 1500}, {"i": "irnby-05.jpg", "w": 1126, "h": 1500}, {"i": "irnby-06.jpg", "w": 1126, "h": 1500}, {"i": "irnby-07.jpg", "w": 1126, "h": 1500}], "me": [{"i": "me-01.jpg", "w": 1500, "h": 843}, {"i": "me-02.jpg", "w": 1500, "h": 843}, {"i": "me-03.jpg", "w": 1500, "h": 843}, {"i": "me-04.jpg", "w": 1500, "h": 843}, {"i": "me-05.jpg", "w": 1500, "h": 844}, {"i": "me-06.jpg", "w": 1177, "h": 640}, {"i": "me-07.jpg", "w": 1500, "h": 843}, {"i": "me-08.jpg", "w": 1500, "h": 843}, {"i": "me-09.jpg", "w": 1500, "h": 843}, {"i": "me-10.jpg", "w": 1500, "h": 843}, {"i": "me-11.jpg", "w": 1500, "h": 843}, {"i": "me-12.jpg", "w": 1500, "h": 843}, {"i": "me-13.jpg", "w": 1500, "h": 843}, {"i": "me-14.jpg", "w": 1500, "h": 844}, {"i": "me-15.jpg", "w": 1500, "h": 843}, {"i": "me-16.jpg", "w": 1500, "h": 822}, {"i": "me-17.jpg", "w": 1500, "h": 843}, {"i": "me-18.jpg", "w": 997, "h": 1500}, {"i": "me-19.jpg", "w": 997, "h": 1500}, {"i": "me-20.jpg", "w": 997, "h": 1500}, {"i": "me-21.jpg", "w": 996, "h": 1500}, {"i": "me-22.jpg", "w": 997, "h": 1500}, {"i": "me-23.jpg", "w": 997, "h": 1500}, {"i": "me-24.jpg", "w": 997, "h": 1500}, {"i": "me-25.jpg", "w": 997, "h": 1500}, {"i": "me-26.jpg", "w": 997, "h": 1500}, {"i": "me-27.jpg", "w": 997, "h": 1500}, {"i": "me-28.jpg", "w": 997, "h": 1500}, {"i": "me-29.jpg", "w": 997, "h": 1500}, {"i": "me-30.jpg", "w": 997, "h": 1500}, {"i": "me-31.jpg", "w": 1500, "h": 843}, {"i": "me-32.jpg", "w": 1500, "h": 843}, {"i": "me-33.jpg", "w": 1500, "h": 843}], "clip": [{"v": "clip-01.mp4", "p": "clip-01.jpg"}], "snip": [{"v": "snip-01.mp4", "p": "snip-01.jpg"}, {"v": "snip-02.mp4", "p": "snip-02.jpg"}, {"v": "snip-03.mp4", "p": "snip-03.jpg"}], "nikol": [{"v": "nikol-01.mp4", "p": "nikol-01.jpg"}, {"v": "nikol-02.mp4", "p": "nikol-02.jpg"}], "event": [{"i": "event-01.jpg", "w": 1500, "h": 1000}, {"i": "event-02.jpg", "w": 1000, "h": 1500}, {"i": "event-03.jpg", "w": 1000, "h": 1500}, {"i": "event-04.jpg", "w": 1000, "h": 1500}, {"i": "event-05.jpg", "w": 1000, "h": 1500}, {"i": "event-06.jpg", "w": 1000, "h": 1500}, {"i": "event-07.jpg", "w": 1000, "h": 1500}, {"i": "event-08.jpg", "w": 1000, "h": 1500}, {"i": "event-09.jpg", "w": 1000, "h": 1500}, {"i": "event-10.jpg", "w": 1000, "h": 1500}, {"i": "event-11.jpg", "w": 1000, "h": 1500}, {"i": "event-12.jpg", "w": 1000, "h": 1500}, {"i": "event-13.jpg", "w": 1000, "h": 1500}, {"i": "event-14.jpg", "w": 1500, "h": 1000}], "eventvid": [{"v": "event-video.mp4", "p": "event-video.jpg"}], "abandoned": [{"i": "aband-01.jpg", "w": 997, "h": 1500}, {"i": "aband-02.jpg", "w": 997, "h": 1500}, {"i": "aband-03.jpg", "w": 997, "h": 1500}, {"i": "aband-04.jpg", "w": 997, "h": 1500}, {"i": "aband-05.jpg", "w": 1019, "h": 1500}, {"i": "aband-06.jpg", "w": 997, "h": 1500}, {"i": "aband-07.jpg", "w": 997, "h": 1500}, {"i": "aband-08.jpg", "w": 997, "h": 1500}], "ira": [{"v": "ira-02.mp4", "p": "ira-02.jpg"}, {"v": "ira-04.mp4", "p": "ira-04.jpg"}, {"v": "ira-01.mp4", "p": "ira-01.jpg"}, {"v": "ira-05.mp4", "p": "ira-05.jpg"}, {"v": "ira-03.mp4", "p": "ira-03.jpg"}]};
 const PHOTO_SETS = {snow: M.me.filter((_, i) => i < 17 || i > 29), water: M.me.slice(17, 30)};
 const all = [];
 
@@ -369,10 +437,18 @@ function fig(item){
   f.onclick = () => open(all.indexOf(item));
   all.push(item); return f;
 }
+function phone(item, i, n){
+  const d = document.createElement('div'); d.className = 'phone reel' + (i === Math.floor(n / 2) ? ' mid' : '');
+  d.innerHTML = `<div class="scr"><video data-src="media/${item.v}" poster="media/${item.p}" muted loop playsinline preload="none"></video><span class="play">▶</span></div>`;
+  d.dataset.cursor = 'смотреть со звуком';
+  d.onclick = () => open(all.indexOf(item));
+  all.push(item); return d;
+}
 document.querySelectorAll('[data-set]').forEach(box => {
   const set = box.dataset.set, items = PHOTO_SETS[set] || M[set] || [];
   const vids = items.filter(x => x.v), imgs = items.filter(x => x.i);
-  if (box.classList.contains('masonry')) items.forEach(x => box.append(fig(x)));
+  if (box.classList.contains('stage')) items.forEach((x, i) => box.append(phone(x, i, items.length)));
+  else if (box.classList.contains('masonry')) items.forEach(x => box.append(fig(x)));
   else [...vids, ...imgs].forEach(x => box.append(reel(x)));
 });
 
@@ -381,10 +457,10 @@ const vio = new IntersectionObserver(es => es.forEach(e => {
   const v = e.target;
   if (e.isIntersecting){ if (!v.src) v.src = v.dataset.src; v.play().catch(()=>{}); }
   else v.pause();
-}), {threshold: .35});
+}), {threshold: .2});
 document.querySelectorAll('.reel video').forEach(v => vio.observe(v));
 
-const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } }), {threshold: .12});
+const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } }), {threshold: 0, rootMargin: '0px 0px -10% 0px'});
 document.querySelectorAll('.reveal').forEach(el => rio.observe(el));
 
 // lightbox
@@ -550,6 +626,7 @@ async function unfold(e){
   scrollTo({top: savedY, behavior: 'instant'});
   nope.classList.remove('gone');
   document.querySelectorAll('.hero video').forEach(v => v.play().catch(()=>{}));
+  document.querySelectorAll('.reel video').forEach(v => { vio.unobserve(v); vio.observe(v); });   // restart reels on screen
 }
 nope.onclick = crumple;
 document.getElementById('unfold').onclick = unfold;
@@ -558,6 +635,115 @@ document.querySelector('.wide').onclick = function(){
   lbin.innerHTML = `<video src="${this.dataset.video}" controls autoplay playsinline style="max-width:92vw;max-height:88vh"></video>`;
   lb.classList.add('on'); document.body.style.overflow = 'hidden'; cur = -1;
 };
+
+/* ===== motion: preloader, letters, phones fan, marquee by scroll, cursor, magnets ===== */
+if (document.documentElement.classList.contains('anim')){
+  gsap.registerPlugin(ScrollTrigger);
+  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const pre = $('pre');
+  setTimeout(() => pre.remove(), 5000);            // safety net
+
+  // split text nodes into masked words of letters (keeps links and <br>)
+  function split(el){
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)){ frag.append(' '); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          [...part].forEach(c => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = c; w.append(s); });
+          frag.append(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+    });
+    walk(el); return el.querySelectorAll('.ch');
+  }
+  const unmask = el => el.querySelectorAll('.w').forEach(w => w.classList.add('open'));
+
+  const h1 = document.querySelector('h1'), h1ch = split(h1);
+  gsap.set(h1ch, {yPercent: 115});
+  gsap.set('.hero-txt .kicker, .hero-row', {autoAlpha: 0, y: 24});
+  gsap.set('.hero-media video', {scale: 1.25});
+
+  const intro = gsap.timeline({paused: true});
+  intro.to('.hero-media video', {scale: 1, duration: 1.8, ease: 'expo.out', stagger: .08}, 0)
+       .to(h1ch, {yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: .035, onComplete: () => unmask(h1)}, .1)
+       .to('.hero-txt .kicker', {autoAlpha: 1, y: 0, duration: .7, ease: 'back.out(2)'}, .5)
+       .to('.hero-row', {autoAlpha: 1, y: 0, duration: .8, ease: 'power3.out'}, .7);
+
+  const cnt = {v: 0};
+  gsap.timeline()
+    .to(cnt, {v: 100, duration: 1.1, ease: 'power2.inOut', onUpdate: () => $('preN').textContent = Math.round(cnt.v)})
+    .to(pre, {clipPath: 'inset(0 0 100% 0)', duration: .8, ease: 'expo.inOut', onStart: () => intro.play()}, '+=.1')
+    .add(() => pre.remove());
+
+  // section titles: letters rise when they enter
+  document.querySelectorAll('.sec-head h2').forEach(h => {
+    const ch = split(h);
+    gsap.from(ch, {yPercent: 115, duration: 1, ease: 'expo.out', stagger: .03,
+      scrollTrigger: {trigger: h, start: 'top 97%', once: true}, onComplete: () => unmask(h)});
+  });
+
+  // the "не нажимай" pill steps aside while the phones are on screen
+  ScrollTrigger.create({trigger: '.stage', start: 'top 80%', end: 'bottom 20%', toggleClass: {targets: '#nope', className: 'aside'}});
+
+  // phones: fanned stack that spreads out with scroll (desktop)
+  gsap.matchMedia().add('(min-width: 821px)', () => {
+    const ph = gsap.utils.toArray('.stage .phone'), mid = Math.floor(ph.length / 2);
+    gsap.from(ph, {
+      x: i => { const r = ph[i].getBoundingClientRect(), s = ph[mid].getBoundingClientRect(); return (s.left + s.width / 2) - (r.left + r.width / 2); },
+      rotate: i => (i - mid) * 7, rotateY: i => (i - mid) * -18, y: i => Math.abs(i - mid) * 30, scale: .85,
+      ease: 'none',
+      scrollTrigger: {trigger: '.stage', start: 'top 92%', end: 'center 55%', scrub: .8}
+    });
+    gsap.from('.sticker', {scale: 0, rotate: -40, duration: .6, ease: 'back.out(3)', stagger: .2,
+      scrollTrigger: {trigger: '.stage', start: 'top 70%', once: true}});
+  });
+
+  // marquee speeds up and flips with scroll direction
+  const mq = gsap.to('.marquee div', {xPercent: -50, duration: 28, ease: 'none', repeat: -1});
+  mq.totalTime(28 * 1000);                          // room to run backwards when scrolling up
+  ScrollTrigger.create({onUpdate: self => {
+    const v = self.getVelocity(), k = gsap.utils.clamp(-6, 6, v / 250);
+    gsap.to(mq, {timeScale: (v < 0 ? -1 : 1) * (1 + Math.abs(k)), duration: .2, overwrite: true});
+    gsap.to(mq, {timeScale: v < 0 ? -1 : 1, duration: 1.2, delay: .25});
+  }});
+
+  if (fine){
+    // cursor: dot that turns into a pink badge over media
+    const c = $('cur'), badge = c.querySelector('em');
+    const qx = gsap.quickTo(c, 'x', {duration: .25, ease: 'power3'}), qy = gsap.quickTo(c, 'y', {duration: .25, ease: 'power3'});
+    addEventListener('pointermove', e => { qx(e.clientX); qy(e.clientY); });
+    document.querySelectorAll('.reel:not(.phone)').forEach(el => el.dataset.cursor = 'смотреть');
+    document.querySelectorAll('.masonry figure').forEach(el => el.dataset.cursor = 'открыть');
+    document.querySelector('.wide').dataset.cursor = 'смотреть клип';
+    document.addEventListener('pointerover', e => {
+      const t = e.target.closest('[data-cursor]');
+      if (t && !lb.classList.contains('on')){ badge.textContent = t.dataset.cursor; c.classList.add('big'); }
+      else c.classList.remove('big');
+    });
+
+    // magnetic buttons
+    document.querySelectorAll('.btn, .c-row a').forEach(b => {
+      b.addEventListener('pointermove', e => {
+        const r = b.getBoundingClientRect();
+        gsap.to(b, {x: (e.clientX - r.left - r.width / 2) * .35, y: (e.clientY - r.top - r.height / 2) * .35, duration: .4, ease: 'power3'});
+      });
+      b.addEventListener('pointerleave', () => gsap.to(b, {x: 0, y: 0, duration: .9, ease: 'elastic.out(1,.35)'}));
+    });
+
+    // phones tilt toward the cursor
+    document.querySelectorAll('.phone').forEach(p => {
+      p.addEventListener('pointermove', e => {
+        const r = p.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5;
+        gsap.to(p, {rotateY: dx * 18, rotateX: -dy * 14, y: -10, duration: .4, ease: 'power2'});
+      });
+      p.addEventListener('pointerleave', () => gsap.to(p, {rotateY: 0, rotateX: 0, y: 0, duration: .8, ease: 'elastic.out(1,.4)'}));
+    });
+  }
+}
 </script>
 </body>
 </html>
