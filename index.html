@@ -129,7 +129,7 @@ footer{padding:24px clamp(16px,4vw,48px);border-top:1px solid var(--line);displa
 
 /* paper crumple joke */
 #page.crumpling{position:fixed;inset:0;overflow:hidden;z-index:30;will-change:transform,clip-path;background:var(--bg)}
-body{transition:background-color .5s}
+body{transition:background-color 1.8s ease-in-out}
 body.crumpled{background:var(--pink)}
 .joke h2{margin-bottom:28px!important}
 body.lagging, body.lagging *{cursor:progress!important}
@@ -249,15 +249,15 @@ body:has(.lb.on) .cur, body:has(.joke.on) .cur{display:none!important}
 
 <section id="reels">
   <div class="sec-head reveal"><span class="num">01</span><h2>Reels</h2>
-    <p>Снимаю на iPhone и монтирую. Сценарий, кадр, цвет, ритм под трек и короткая подпись с самоиронией, чтобы досматривали до конца.</p></div>
+    <p>Снимаю на iPhone и монтирую в CapCut. Сценарий, кадр, цвет и склейки в ритм трека, чтобы досматривали до конца.</p></div>
 
   <div class="project">
-    <div class="p-top reveal"><h3>Ирина Зангирова</h3><div class="tags"><span class="tag hot">съёмка на iPhone</span><span class="tag hot">монтаж</span><span class="tag">сценарии</span><span class="tag">цвет</span></div></div>
-    <p class="p-note reveal">Lifestyle-блог бывшей художественной гимнастки и владелицы школы растяжки. Студия с арками, несколько образов от нежно-розового до тёмного и серия коротких роликов из одного съёмочного дня.</p>
+    <div class="p-top reveal"><h3>Ирина Зангирова</h3><div class="tags"><span class="tag hot">съёмка на iPhone</span><span class="tag hot">монтаж в CapCut</span><span class="tag">сценарии</span><span class="tag">цвет</span></div></div>
+    <p class="p-note reveal">Lifestyle-блог бывшей художественной гимнастки и владелицы школы растяжки. Студия с арками, зал, будни между тренировками и несколько образов от нежно-розового до тёмного.</p>
     <div class="stage-wrap">
       <span class="sticker">снято на iPhone</span>
       <div class="stage" data-set="ira"></div>
-      <span class="sticker b">снимала я</span>
+      <span class="sticker b">снимала и монтировала я</span>
       <p class="hint">листайте вбок → нажмите на ролик, чтобы смотреть со звуком</p>
     </div>
   </div>
@@ -347,7 +347,7 @@ body:has(.lb.on) .cur, body:has(.joke.on) .cur{display:none!important}
     </div>
     <ul class="skills reveal">
       <li><i>01</i><div><b>Идеи и концепции</b><span>рубрики, контент-план, сценарии, референсы под каждую площадку</span></div></li>
-      <li><i>02</i><div><b>Reels с телефона</b><span>съёмка на iPhone, монтаж под трек, цвет, подписи</span></div></li>
+      <li><i>02</i><div><b>Reels с телефона</b><span>съёмка на iPhone, монтаж под трек, цвет, склейки</span></div></li>
       <li><i>03</i><div><b>Продакшен под ключ</b><span>команда, подрядчики, локации, модели, тайминг съёмочного дня</span></div></li>
       <li><i>04</i><div><b>Мероприятия</b><span>гости, партнёры и подарки, артисты, ведущий, фото и видео</span></div></li>
       <li><i>05</i><div><b>Фото</b><span>авторские серии, идея, свет, съёмка, ретушь</span></div></li>
@@ -413,10 +413,11 @@ body:has(.lb.on) .cur, body:has(.joke.on) .cur{display:none!important}
   </filter>
 </svg>
 
+<script src="media/paper/paper3d.js"></script>
 <div class="lb" id="lb"><button class="nav prev" aria-label="Назад">←</button><button class="nav next" aria-label="Вперёд">→</button><button class="x" aria-label="Закрыть">×</button><div id="lbin"></div></div>
 
 <script>
-const M = {"eni": [{"v": "eni-01.mp4", "p": "eni-01.jpg"}, {"v": "eni-02.mp4", "p": "eni-02.jpg"}, {"v": "eni-03.mp4", "p": "eni-03.jpg"}, {"i": "eni-04.jpg", "w": 1126, "h": 1500}, {"i": "eni-05.jpg", "w": 1126, "h": 1500}, {"i": "eni-06.jpg", "w": 1200, "h": 1500}, {"i": "eni-07.jpg", "w": 1200, "h": 1500}, {"i": "eni-08.jpg", "w": 1200, "h": 1500}, {"i": "eni-09.jpg", "w": 1200, "h": 1500}], "badbarbie": [{"v": "badbarbie-01.mp4", "p": "badbarbie-01.jpg"}, {"v": "badbarbie-02.mp4", "p": "badbarbie-02.jpg"}], "kristi": [{"v": "kristi-01.mp4", "p": "kristi-01.jpg"}, {"v": "kristi-02.mp4", "p": "kristi-02.jpg"}, {"v": "kristi-03.mp4", "p": "kristi-03.jpg"}], "irnby": [{"i": "irnby-01.jpg", "w": 1130, "h": 1500}, {"i": "irnby-02.jpg", "w": 1126, "h": 1500}, {"i": "irnby-03.jpg", "w": 1126, "h": 1500}, {"i": "irnby-04.jpg", "w": 1126, "h": 1500}, {"i": "irnby-05.jpg", "w": 1126, "h": 1500}, {"i": "irnby-06.jpg", "w": 1126, "h": 1500}, {"i": "irnby-07.jpg", "w": 1126, "h": 1500}], "me": [{"i": "me-01.jpg", "w": 1500, "h": 843}, {"i": "me-02.jpg", "w": 1500, "h": 843}, {"i": "me-03.jpg", "w": 1500, "h": 843}, {"i": "me-04.jpg", "w": 1500, "h": 843}, {"i": "me-05.jpg", "w": 1500, "h": 844}, {"i": "me-06.jpg", "w": 1177, "h": 640}, {"i": "me-07.jpg", "w": 1500, "h": 843}, {"i": "me-08.jpg", "w": 1500, "h": 843}, {"i": "me-09.jpg", "w": 1500, "h": 843}, {"i": "me-10.jpg", "w": 1500, "h": 843}, {"i": "me-11.jpg", "w": 1500, "h": 843}, {"i": "me-12.jpg", "w": 1500, "h": 843}, {"i": "me-13.jpg", "w": 1500, "h": 843}, {"i": "me-14.jpg", "w": 1500, "h": 844}, {"i": "me-15.jpg", "w": 1500, "h": 843}, {"i": "me-16.jpg", "w": 1500, "h": 822}, {"i": "me-17.jpg", "w": 1500, "h": 843}, {"i": "me-18.jpg", "w": 997, "h": 1500}, {"i": "me-19.jpg", "w": 997, "h": 1500}, {"i": "me-20.jpg", "w": 997, "h": 1500}, {"i": "me-21.jpg", "w": 996, "h": 1500}, {"i": "me-22.jpg", "w": 997, "h": 1500}, {"i": "me-23.jpg", "w": 997, "h": 1500}, {"i": "me-24.jpg", "w": 997, "h": 1500}, {"i": "me-25.jpg", "w": 997, "h": 1500}, {"i": "me-26.jpg", "w": 997, "h": 1500}, {"i": "me-27.jpg", "w": 997, "h": 1500}, {"i": "me-28.jpg", "w": 997, "h": 1500}, {"i": "me-29.jpg", "w": 997, "h": 1500}, {"i": "me-30.jpg", "w": 997, "h": 1500}, {"i": "me-31.jpg", "w": 1500, "h": 843}, {"i": "me-32.jpg", "w": 1500, "h": 843}, {"i": "me-33.jpg", "w": 1500, "h": 843}], "clip": [{"v": "clip-01.mp4", "p": "clip-01.jpg"}], "snip": [{"v": "snip-01.mp4", "p": "snip-01.jpg"}, {"v": "snip-02.mp4", "p": "snip-02.jpg"}, {"v": "snip-03.mp4", "p": "snip-03.jpg"}], "nikol": [{"v": "nikol-01.mp4", "p": "nikol-01.jpg"}, {"v": "nikol-02.mp4", "p": "nikol-02.jpg"}], "event": [{"i": "event-01.jpg", "w": 1500, "h": 1000}, {"i": "event-02.jpg", "w": 1000, "h": 1500}, {"i": "event-03.jpg", "w": 1000, "h": 1500}, {"i": "event-04.jpg", "w": 1000, "h": 1500}, {"i": "event-05.jpg", "w": 1000, "h": 1500}, {"i": "event-06.jpg", "w": 1000, "h": 1500}, {"i": "event-07.jpg", "w": 1000, "h": 1500}, {"i": "event-08.jpg", "w": 1000, "h": 1500}, {"i": "event-09.jpg", "w": 1000, "h": 1500}, {"i": "event-10.jpg", "w": 1000, "h": 1500}, {"i": "event-11.jpg", "w": 1000, "h": 1500}, {"i": "event-12.jpg", "w": 1000, "h": 1500}, {"i": "event-13.jpg", "w": 1000, "h": 1500}, {"i": "event-14.jpg", "w": 1500, "h": 1000}], "eventvid": [{"v": "event-video.mp4", "p": "event-video.jpg"}], "abandoned": [{"i": "aband-01.jpg", "w": 997, "h": 1500}, {"i": "aband-02.jpg", "w": 997, "h": 1500}, {"i": "aband-03.jpg", "w": 997, "h": 1500}, {"i": "aband-04.jpg", "w": 997, "h": 1500}, {"i": "aband-05.jpg", "w": 1019, "h": 1500}, {"i": "aband-06.jpg", "w": 997, "h": 1500}, {"i": "aband-07.jpg", "w": 997, "h": 1500}, {"i": "aband-08.jpg", "w": 997, "h": 1500}], "ira": [{"v": "ira-02.mp4", "p": "ira-02.jpg"}, {"v": "ira-04.mp4", "p": "ira-04.jpg"}, {"v": "ira-01.mp4", "p": "ira-01.jpg"}, {"v": "ira-05.mp4", "p": "ira-05.jpg"}, {"v": "ira-03.mp4", "p": "ira-03.jpg"}]};
+const M = {"eni": [{"v": "eni-01.mp4", "p": "eni-01.jpg"}, {"v": "eni-02.mp4", "p": "eni-02.jpg"}, {"v": "eni-03.mp4", "p": "eni-03.jpg"}, {"i": "eni-04.jpg", "w": 1126, "h": 1500}, {"i": "eni-05.jpg", "w": 1126, "h": 1500}, {"i": "eni-06.jpg", "w": 1200, "h": 1500}, {"i": "eni-07.jpg", "w": 1200, "h": 1500}, {"i": "eni-08.jpg", "w": 1200, "h": 1500}, {"i": "eni-09.jpg", "w": 1200, "h": 1500}], "badbarbie": [{"v": "badbarbie-01.mp4", "p": "badbarbie-01.jpg"}, {"v": "badbarbie-02.mp4", "p": "badbarbie-02.jpg"}], "kristi": [{"v": "kristi-01.mp4", "p": "kristi-01.jpg"}, {"v": "kristi-02.mp4", "p": "kristi-02.jpg"}, {"v": "kristi-03.mp4", "p": "kristi-03.jpg"}], "irnby": [{"i": "irnby-01.jpg", "w": 1130, "h": 1500}, {"i": "irnby-02.jpg", "w": 1126, "h": 1500}, {"i": "irnby-03.jpg", "w": 1126, "h": 1500}, {"i": "irnby-04.jpg", "w": 1126, "h": 1500}, {"i": "irnby-05.jpg", "w": 1126, "h": 1500}, {"i": "irnby-06.jpg", "w": 1126, "h": 1500}, {"i": "irnby-07.jpg", "w": 1126, "h": 1500}], "me": [{"i": "me-01.jpg", "w": 1500, "h": 843}, {"i": "me-02.jpg", "w": 1500, "h": 843}, {"i": "me-03.jpg", "w": 1500, "h": 843}, {"i": "me-04.jpg", "w": 1500, "h": 843}, {"i": "me-05.jpg", "w": 1500, "h": 844}, {"i": "me-06.jpg", "w": 1177, "h": 640}, {"i": "me-07.jpg", "w": 1500, "h": 843}, {"i": "me-08.jpg", "w": 1500, "h": 843}, {"i": "me-09.jpg", "w": 1500, "h": 843}, {"i": "me-10.jpg", "w": 1500, "h": 843}, {"i": "me-11.jpg", "w": 1500, "h": 843}, {"i": "me-12.jpg", "w": 1500, "h": 843}, {"i": "me-13.jpg", "w": 1500, "h": 843}, {"i": "me-14.jpg", "w": 1500, "h": 844}, {"i": "me-15.jpg", "w": 1500, "h": 843}, {"i": "me-16.jpg", "w": 1500, "h": 822}, {"i": "me-17.jpg", "w": 1500, "h": 843}, {"i": "me-18.jpg", "w": 997, "h": 1500}, {"i": "me-19.jpg", "w": 997, "h": 1500}, {"i": "me-20.jpg", "w": 997, "h": 1500}, {"i": "me-21.jpg", "w": 996, "h": 1500}, {"i": "me-22.jpg", "w": 997, "h": 1500}, {"i": "me-23.jpg", "w": 997, "h": 1500}, {"i": "me-24.jpg", "w": 997, "h": 1500}, {"i": "me-25.jpg", "w": 997, "h": 1500}, {"i": "me-26.jpg", "w": 997, "h": 1500}, {"i": "me-27.jpg", "w": 997, "h": 1500}, {"i": "me-28.jpg", "w": 997, "h": 1500}, {"i": "me-29.jpg", "w": 997, "h": 1500}, {"i": "me-30.jpg", "w": 997, "h": 1500}, {"i": "me-31.jpg", "w": 1500, "h": 843}, {"i": "me-32.jpg", "w": 1500, "h": 843}, {"i": "me-33.jpg", "w": 1500, "h": 843}], "clip": [{"v": "clip-01.mp4", "p": "clip-01.jpg"}], "snip": [{"v": "snip-01.mp4", "p": "snip-01.jpg"}, {"v": "snip-02.mp4", "p": "snip-02.jpg"}, {"v": "snip-03.mp4", "p": "snip-03.jpg"}], "nikol": [{"v": "nikol-01.mp4", "p": "nikol-01.jpg"}, {"v": "nikol-02.mp4", "p": "nikol-02.jpg"}], "event": [{"i": "event-01.jpg", "w": 1500, "h": 1000}, {"i": "event-02.jpg", "w": 1000, "h": 1500}, {"i": "event-03.jpg", "w": 1000, "h": 1500}, {"i": "event-04.jpg", "w": 1000, "h": 1500}, {"i": "event-05.jpg", "w": 1000, "h": 1500}, {"i": "event-06.jpg", "w": 1000, "h": 1500}, {"i": "event-07.jpg", "w": 1000, "h": 1500}, {"i": "event-08.jpg", "w": 1000, "h": 1500}, {"i": "event-09.jpg", "w": 1000, "h": 1500}, {"i": "event-10.jpg", "w": 1000, "h": 1500}, {"i": "event-11.jpg", "w": 1000, "h": 1500}, {"i": "event-12.jpg", "w": 1000, "h": 1500}, {"i": "event-13.jpg", "w": 1000, "h": 1500}, {"i": "event-14.jpg", "w": 1500, "h": 1000}], "eventvid": [{"v": "event-video.mp4", "p": "event-video.jpg"}], "abandoned": [{"i": "aband-01.jpg", "w": 997, "h": 1500}, {"i": "aband-02.jpg", "w": 997, "h": 1500}, {"i": "aband-03.jpg", "w": 997, "h": 1500}, {"i": "aband-04.jpg", "w": 997, "h": 1500}, {"i": "aband-05.jpg", "w": 1019, "h": 1500}, {"i": "aband-06.jpg", "w": 997, "h": 1500}, {"i": "aband-07.jpg", "w": 997, "h": 1500}, {"i": "aband-08.jpg", "w": 997, "h": 1500}], "ira": [{"v": "cc-01.mp4", "p": "cc-01.jpg"}, {"v": "cc-02.mp4", "p": "cc-02.jpg"}, {"v": "cc-03.mp4", "p": "cc-03.jpg"}, {"v": "cc-04.mp4", "p": "cc-04.jpg"}]};
 const PHOTO_SETS = {snow: M.me.filter((_, i) => i < 17 || i > 29), water: M.me.slice(17, 30)};
 const all = [];
 
@@ -514,11 +515,13 @@ function crinkle(ms = 260, vol = .25){
     src.connect(bp).connect(g).connect(actx.destination); src.start();
   } catch (e) {}
 }
-async function lag(ms){
+async function lag(ms, until){
   document.body.classList.add('lagging'); toast.classList.add('on');
   page.style.filter = 'url(#glitch)';
+  let done = !until; if (until) until.finally(() => done = true);
   const t0 = performance.now(), gd = $('glDisp'), gr = $('glR'), gb = $('glB'), gt = $('glTurb');
-  while (performance.now() - t0 < ms){
+  // keeps "freezing" until the screen snapshot is ready (max 6 s)
+  while (performance.now() - t0 < ms || (!done && performance.now() - t0 < 6000)){
     const k = (performance.now() - t0) / ms, hit = Math.random() < .35 + k * .5;
     gt.setAttribute('seed', Math.floor(Math.random() * 999));
     gt.setAttribute('baseFrequency', `0.00001 ${(.01 + Math.random() * .08).toFixed(3)}`);
@@ -577,17 +580,55 @@ function animate(ms, fn){
     (function step(now){ const t = Math.min(1, (now - t0) / ms); fn(t); t < 1 ? requestAnimationFrame(step) : res(); })(t0);
   });
 }
+let used3d = false;
+// real paper: Blender cloth sim + screen snapshot in three.js (media/paper/paper3d.js)
+async function crumple3d(){
+  document.body.classList.add('crumpled');
+  page.style.visibility = 'hidden';
+  let grab = -1;
+  await animate(2100, t => {
+    const s = Math.min(3, Math.floor(t * 4));
+    if (s !== grab){ grab = s; crinkle(320, .22 + s * .05); }
+    Paper3D.setFrame(squeeze(t)); Paper3D.render();
+  });
+  await sleep(250);
+  const g = Paper3D.group;
+  // toss: a flick to the side, two dying bounces on the table, then it rolls out of the frame
+  let lastB = 0;
+  await animate(1300, t => {
+    const x = (1 - Math.pow(1 - t, 2)) * 1.6;
+    const b = Math.abs(Math.sin(t * Math.PI * 3)) * .34 * Math.pow(1 - t, 1.6);   // height toward the camera
+    g.position.set(x, -.08 * t, b);
+    g.rotation.set(t * 1.4, x / .17, -t * 2.5);                                   // rolls like a ball
+    const n = Math.floor(t * 3);
+    if (n !== lastB && n < 3){ lastB = n; crinkle(110, .18 - n * .05); }
+    Paper3D.render();
+  });
+  joke.classList.add('on');
+}
 async function crumple(){
   if (page.classList.contains('crumpling')) return;
   nope.classList.add('gone');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let snap = null;
+  if (!reduced && window.Paper3D){
+    const ok = await Promise.race([Paper3D.preload(), sleep(60).then(() => false)]);
+    if (ok) snap = Paper3D.snapshot().catch(() => null);      // grabs video frames right now
+  }
   document.querySelectorAll('video').forEach(v => v.pause());
   savedY = scrollY;
-  page.classList.add('crumpling');
-  sheet.style.transform = `translateY(${-savedY}px)`;
   const W = innerWidth, H = innerHeight, rect = rectPts(W, H);
   ballPts = makeBall(W, H);
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches){ joke.classList.add('on'); return; }
-  await lag(1500);
+  const pin = () => { page.classList.add('crumpling'); sheet.style.transform = `translateY(${-savedY}px)`; };
+  if (reduced){ pin(); joke.classList.add('on'); return; }
+  await lag(1500, snap);                             // the snapshot is taken meanwhile, page still in normal flow
+  const canvas = snap ? await Promise.race([snap, sleep(300).then(() => null)]) : null;
+  pin();
+  if (canvas){
+    page.style.filter = '';
+    try { Paper3D.build(canvas); used3d = true; } catch (e) { used3d = false; Paper3D.destroy(); }
+    if (used3d) return crumple3d();
+  }
   document.body.classList.add('crumpled');
   page.style.filter = 'url(#crumple)';
   let grab = -1;
@@ -613,10 +654,19 @@ async function unfold(e){
   e.preventDefault();
   joke.classList.remove('on');
   const W = innerWidth, H = innerHeight, rect = rectPts(W, H);
-  page.style.visibility = '';
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  if (used3d){
+    // the ball comes back to the middle and opens up into the page again
+    const g = Paper3D.group; g.position.set(0, 0, 0); g.rotation.set(0, 0, 0);
     crinkle(500, .2);
-    await animate(1000, t => frame(1 - ease(t), rect, ballPts));
+    await animate(1100, t => { Paper3D.setFrame(1 - ease(t)); Paper3D.render(); });
+    page.style.visibility = '';                  // page is under the canvas, swap is invisible
+    Paper3D.destroy(); used3d = false;
+  } else {
+    page.style.visibility = '';
+    if (page.style.clipPath){                    // the old SVG fallback was used
+      crinkle(500, .2);
+      await animate(1000, t => frame(1 - ease(t), rect, ballPts));
+    }
   }
   page.classList.remove('crumpling');
   document.body.classList.remove('crumpled');
@@ -629,6 +679,9 @@ async function unfold(e){
   document.querySelectorAll('.reel video').forEach(v => { vio.unobserve(v); vio.observe(v); });   // restart reels on screen
 }
 nope.onclick = crumple;
+// load the 3D paper quietly once the page has settled
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
+  addEventListener('load', () => setTimeout(() => window.Paper3D && Paper3D.preload(), 2500));
 document.getElementById('unfold').onclick = unfold;
 
 document.querySelector('.wide').onclick = function(){
@@ -675,7 +728,7 @@ if (document.documentElement.classList.contains('anim')){
 
   const cnt = {v: 0};
   gsap.timeline()
-    .to(cnt, {v: 100, duration: 1.1, ease: 'power2.inOut', onUpdate: () => $('preN').textContent = Math.round(cnt.v)})
+    .to(cnt, {v: 100, duration: 1.1, ease: 'power2.inOut', onUpdate: () => { const n = $('preN'); if (n) n.textContent = Math.round(cnt.v); }})
     .to(pre, {clipPath: 'inset(0 0 100% 0)', duration: .8, ease: 'expo.inOut', onStart: () => intro.play()}, '+=.1')
     .add(() => pre.remove());
 
